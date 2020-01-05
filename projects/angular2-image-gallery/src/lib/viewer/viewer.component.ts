@@ -243,32 +243,34 @@ export class ViewerComponent {
 
         switch (this.qualitySelected) {
             case 'auto': {
-                this.categorySelected = 'preview_xxs'
-
-                if (screenWidth > this.images[this.currentIdx]['preview_xxs'].width &&
-                    screenHeight > this.images[this.currentIdx]['preview_xxs'].height) {
-                    this.categorySelected = 'preview_xs'
-                }
-                if (screenWidth > this.images[this.currentIdx]['preview_xs'].width &&
-                    screenHeight > this.images[this.currentIdx]['preview_xs'].height) {
-                    this.categorySelected = 'preview_s'
-                }
-                if (screenWidth > this.images[this.currentIdx]['preview_s'].width &&
-                    screenHeight > this.images[this.currentIdx]['preview_s'].height) {
-                    this.categorySelected = 'preview_m'
-                }
-                if (screenWidth > this.images[this.currentIdx]['preview_m'].width &&
-                    screenHeight > this.images[this.currentIdx]['preview_m'].height) {
-                    this.categorySelected = 'preview_l'
-                }
-                if (screenWidth > this.images[this.currentIdx]['preview_l'].width &&
-                    screenHeight > this.images[this.currentIdx]['preview_l'].height) {
+                this.categorySelected = 'raw'
+                
+                if (this.images[this.currentIdx].hasOwnProperty('preview_xl') &&
+                ((screenWidth > this.images[this.currentIdx]['preview_l'].width && screenWidth < this.images[this.currentIdx]['preview_xl'].width) ||
+                (screenHeight > this.images[this.currentIdx]['preview_l'].height && screenHeight < this.images[this.currentIdx]['preview_xl'].height))) {
                     this.categorySelected = 'preview_xl'
+                } else  if (this.images[this.currentIdx].hasOwnProperty('preview_l') &&
+                ((screenWidth > this.images[this.currentIdx]['preview_m'].width && screenWidth < this.images[this.currentIdx]['preview_l'].width) ||
+                (screenHeight > this.images[this.currentIdx]['preview_m'].height && screenHeight < this.images[this.currentIdx]['preview_l'].height))) {
+                    this.categorySelected = 'preview_l'
+                } else  if (this.images[this.currentIdx].hasOwnProperty('preview_m') &&
+                ((screenWidth > this.images[this.currentIdx]['preview_s'].width && screenWidth < this.images[this.currentIdx]['preview_m'].width) ||
+                (screenHeight > this.images[this.currentIdx]['preview_s'].height && screenHeight < this.images[this.currentIdx]['preview_m'].height))) {
+                    this.categorySelected = 'preview_m'
+                } else  if (this.images[this.currentIdx].hasOwnProperty('preview_s') &&
+                ((screenWidth > this.images[this.currentIdx]['preview_xs'].width && screenWidth < this.images[this.currentIdx]['preview_s'].width) ||
+                (screenHeight > this.images[this.currentIdx]['preview_xs'].height && screenHeight < this.images[this.currentIdx]['preview_s'].height))) {
+                    this.categorySelected = 'preview_s'
+                } else  if (this.images[this.currentIdx].hasOwnProperty('preview_xs') &&
+                ((screenWidth > this.images[this.currentIdx]['preview_xxs'].width && screenWidth < this.images[this.currentIdx]['preview_xs'].width) ||
+                (screenHeight > this.images[this.currentIdx]['preview_xxs'].height && screenHeight < this.images[this.currentIdx]['preview_xs'].height))) {
+                    this.categorySelected = 'preview_xs'
+                } else  if (this.images[this.currentIdx].hasOwnProperty('preview_xxs') &&
+                (screenWidth < this.images[this.currentIdx]['preview_xxs'].width ||
+                screenHeight < this.images[this.currentIdx]['preview_xxs'].height)) {
+                    this.categorySelected = 'preview_xxs'
                 }
-                if (screenWidth > this.images[this.currentIdx]['preview_xl'].width &&
-                    screenHeight > this.images[this.currentIdx]['preview_xl'].height) {
-                    this.categorySelected = 'raw'
-                }
+
                 break
             }
             case 'low': {

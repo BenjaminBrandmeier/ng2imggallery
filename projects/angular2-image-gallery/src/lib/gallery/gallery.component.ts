@@ -91,7 +91,6 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
 
     private fetchDataAndRender(): void {
         this.imageDataCompletePath = this.providedMetadataUri
-
         if (!this.providedMetadataUri) {
             this.imageDataCompletePath = this.providedGalleryName !== '' ?
                 `${this.imageDataStaticPath + this.providedGalleryName}/${this.dataFileName}` :
@@ -142,6 +141,7 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
             this.gallery[currentRowIndex++] = tempRow
 
             tempRow = [this.images[i + 1]]
+            
         }
 
         this.scaleGallery()
@@ -172,7 +172,7 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
             img[this.minimalQualityCategory]['height'] = this.calcIdealHeight()
             originalRowWidth += img[this.minimalQualityCategory]['width']
         })
-
+        
         return originalRowWidth
     }
 
@@ -244,6 +244,6 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
 
     private refreshNavigationErrorState(): void {
         this.leftArrowInactive = this.rowIndex == 0
-        this.rightArrowInactive = this.rowIndex > (this.gallery.length - this.rowsPerPage)
+        this.rightArrowInactive = this.rowIndex >= (this.gallery.length - this.rowsPerPage)
     }
 }
